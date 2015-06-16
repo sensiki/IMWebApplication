@@ -1,0 +1,44 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="../CSS/index.css" />
+    <script type="text/javascript" src="../JS/ajax.js"></script>
+    <script type="text/javascript" src="../JS/json2.js"></script>
+    <script type="text/javascript">
+        function login() {
+            var name = document.getElementById("username").value;
+            var pwd = document.getElementById("pwd").value;
+            var info = document.getElementById("info");
+            ajax("login.ashx", "login=true&name=" + name + "&pwd=" + pwd, function (restext) {
+                var result = JSON.parse(restext);
+                if (result.result == "false")
+                    info.innerHTML = result.data;
+                else
+                    window.location.href = result.data;
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class='wrapper'>
+        <b>智能医疗</b>
+        <div class="main">
+            <div class='username'>
+                <p>
+                    用户名</p>
+                <input id="username" type='text' />
+            </div>
+            <div class='password'>
+                <p>
+                    密码</p>
+                <input id="pwd" type='password' onkeydown='if(event.keyCode == 13)login()'/>
+            </div>
+            <span id="info">请输入用户名和密码!(^@^)</span>
+            <input id="login" class="btn" type="button" value="登录" onclick="login()" />
+        </div>
+    </div>
+</body>
+</html>

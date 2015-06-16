@@ -1,0 +1,175 @@
+﻿*
+{
+	margin: 0;
+	padding: 0;
+}
+
+h1
+{
+	text-align: center;
+	font-size: 40px;
+	color: #55a;
+	height: 100px;
+	line-height: 80px;
+	letter-spacing: 10px;
+	text-shadow: -2px 2px 2px #aaa;
+}
+var
+{
+	position: absolute;
+	right: 80px;
+	top: 40px;
+	background: url('../images/back.jpg') 0 20px no-repeat;
+	background-size: 80px 30px;
+	width: 80px;
+	height: 50px;
+	line-height: 30px;
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+	cursor: hand;
+}
+ul, .content div
+{
+	float: left;
+}
+.content li
+{
+	list-style: none;
+	height: 40px;
+	line-height: 40px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	width: 150px;
+	border: 1px #ccc solid;
+	border-radius: 10px 0 0 10px;
+	cursor: pointer;
+	cursor: hand;
+	letter-spacing: 5px;
+	font-size: 20px;
+	border-right: 0;
+}
+.content li:hover, .content .selected
+{
+	background: #ccc;
+	box-shadow: -2px 2px 2px 0 #aaa;
+	color: #fff;
+	text-shadow: 1px 1px 1px #000;
+}
+.content div
+{
+	border: 1px #ccc solid;
+	box-shadow: -2px 0 2px 1px #ccc;
+	width: 960px;
+	height: 480px;
+	display: none;
+}
+.content .show
+{
+	display: block;
+}
+.show p
+{
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	border: 2px #779FC6 solid;
+	letter-spacing: 3px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+.show .create
+{
+	width: 120px;
+}
+.show .create
+{
+	margin-left: 120px;
+	cursor: pointer;
+	cursor: hand;
+}
+.show .search
+{
+	text-align: center;
+	width: 400px;
+	margin-left: 200px;
+}
+.search .text
+{
+	width: 300px;
+	height: 20px;
+	border: 0;
+	border-bottom: 1px #ccc solid;
+	text-indent: 1em;
+	color: #aaa;
+	outline: 0;
+}
+.show .btn
+{
+	width: 100px;
+	cursor: pointer;
+	margin-left: 292px;
+	text-align: center;
+}
+table
+{
+	clear: both;
+	margin-left: 200px;
+	width: 800px;
+	border: 2px #779FC6 solid;
+	border-collapse: collapse;
+	text-align: center;
+}
+td, th
+{
+	height: 30px;
+	border: 2px #779FC6 solid;
+	border-spacing: 0;
+}
+th
+{
+	background: #cae7fa;
+}
+tr:nth-child(even)
+{
+	background: #ecf5fa;
+}
+td span
+{
+	text-decoration: underline;
+	cursor: pointer;
+	cursor: hand;
+}
+.page
+{
+	text-align: center;
+	margin-left: 450px;
+	width: 300px;
+}
+.page span
+{
+	text-decoration: underline;
+	cursor: pointer;
+	cursor: hand;
+}
+.task .checkall, .doctor .checkall
+{
+	width: 80px;
+	margin-left: 210px;
+	cursor: pointer;
+	cursor: hand;
+}
+.show .record
+{
+	background: url('../images/new.jpg') no-repeat;
+	background-size: 80px 30px;
+	width: 80px;
+	height: 24px;
+	margin-left:40px;
+	font-weight: bold;
+	padding-top: 3px;
+	cursor: pointer;
+	cursor: hand;
+	text-align:center;
+	border: 0;
+}

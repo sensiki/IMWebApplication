@@ -1,0 +1,841 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>智能医疗管理(管理员)</title>
+    <link rel="stylesheet" type="text/css" href="../CSS/adminmain.css" />
+
+    <script src="../JS/json2.js" type="text/javascript"></script>
+
+    <script src="../JS/ajax.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        var slpatient_page = 1;
+        var slpatient_selete = 0;
+        var slpatient_page_count = 0;
+        function slpatient(type) {
+            if (type != 'select' && slpatient_selete == 0)
+                return;
+            var slpatient = document.getElementById("slpatient").value;
+            if (slpatient == "请输入查询条件，如患者姓名或手机号")
+                slpatient = "";
+            var slpata = document.getElementById("slpata");
+            if (type == "first")
+                slpatient_page = 1;
+            else if (type == "bf") {
+                if (slpatient_selete == 0 || slpatient_page == 1)
+                    return;
+                slpatient_page--;
+            }
+            else if (type == "af") {
+                if (slpatient_selete == 0 || slpatient_page == slpatient_page_count)
+                    return;
+                slpatient_page++;
+            }
+            else if (type == "end")
+                slpatient_page = slpatient_page_count;
+            else
+                slpatient_page = 1;
+            ajax("admin.ashx", "type=slpatient&page=" + slpatient_page + "&slpatient=" + slpatient, function (restext) {
+                var result = JSON.parse(restext);
+                if (result.result == "true") {
+                    slpata.innerHTML = result.data;
+                    slpatient_selete = 1;
+                    slpatient_page_count = result.count;
+                }
+            });
+        }
+        function delete_patient(id) {
+            ajax("admin.ashx", "type=delpatient&patient_id=" + id, function (restext) {
+                if (restext == "true")
+                    slpatient();
+
+            });
+        }
+        function delete_doc(id) {
+            ajax("admin.ashx", "type=deldoc&doc_id=" + id, function (restext) {
+                if (restext == "true")
+                    sldoc();
+
+            });
+        }
+        function delete_task(id) {
+            ajax("admin.ashx", "type=deltask&taskid=" + id, function (restext) {
+                if (restext == "true")
+                    sltask();
+            });
+        }
+        var sltask_page = 1;
+        var sltask_selete = 0;
+        var sltask_page_count = 0;
+        function sltask(type) {
+            if (type != 'select' && sltask_selete == 0)
+                return;
+            if (type == "first")
+                sltask_page = 1;
+            else if (type == "bf") {
+                if (sltask_selete == 0 || sltask_page == 1)
+                    return;
+                sltask_page--;
+            }
+            else if (type == "af") {
+                if (sltask_selete == 0 || sltask_page == sltask_page_count)
+                    return;
+                sltask_page++;
+            }
+            else if (type == "end")
+                sltask_page = sltask_page_count;
+            else
+                sltask_page = 1;
+            var sltask = document.getElementById("sltask").value;
+            if (sltask == "请输入查询条件，如患者姓名或手机号")
+                sltask = "";
+            var sltata = document.getElementById("sltata");
+            var isdiag = document.getElementById("isdiag").checked;
+            ajax("admin.ashx", "type=sltata&page=" + sltask_page + "&sltask=" + sltask + "&isdiag=" + isdiag, function (restext) {
+                var result = JSON.parse(restext);
+                if (result.result == "true") {
+                    sltata.innerHTML = result.data;
+                    sltask_selete = 1;
+                    sltask_page_count = result.count;
+                }
+            });
+        }
+        function detailcase(obj, id, taskid) {
+            window.open("cureinfo.ashx?type=getpatient&patient_id=" + id + "&task_id=" +taskid);
+        }
+        var sldoc_page = 1;
+        var sldoc_selete = 0;
+        var sldoc_page_count = 0;
+        function sldoc(type) {
+            if (type != 'select' && sldoc_selete == 0)
+                return;
+            if (type == "first")
+                sldoc_page = 1;
+            else if (type == "bf") {
+                if (sldoc_selete == 0 || sldoc_page == 1)
+                    return;
+                sldoc_page--;
+            }
+            else if (type == "af") {
+                if (sldoc_selete == 0 || sldoc_page == sldoc_page_count)
+                    return;
+                sldoc_page++;
+            }
+            else if (type == "end")
+                sldoc_page = sldoc_page_count;
+            else
+                sldoc_page = 1;
+            var doc = document.getElementById("doc").value;
+            if (doc == "请输入查询条件，如医师姓名或手机号")
+                doc = "";
+            var sldocta = document.getElementById("sldocta");
+            ajax("admin.ashx", "type=sldocta&page=" + sldoc_page + "&sldoc=" + doc, function (restext) {
+                var result = JSON.parse(restext);
+                if (result.result == "true") {
+                    sldocta.innerHTML = result.data;
+                    sldoc_selete = 1;
+                    sldoc_page_count = result.count;
+                }
+            });
+        }
+        function docpermisson(ch) {
+            var id = ch.value;
+            var check = ch.checked;
+            ajax("admin.ashx", "type=docper&docid=" + id + "&checked=" + check, function (restext) {
+                if (restext == "false") {
+                    alert("授权失败");
+                    ch.checked = ch.checked ? false : true;
+                }
+            });
+        }
+    </script>
+
+</head>
+<body>
+    <div class='wrapper'>
+        <h1>
+            智能医疗管理(管理员)</h1>
+        <div class='content'>
+            <ul>
+                <li class='selected'>患者管理</li>
+                <li>任务管理</li>
+                <li>医师管理</li>
+                <li>数据库管理</li>
+            </ul>
+            <div class='show'>
+                <p class='create createcase'>
+                    创建病例
+                </p>
+                <p class='search'>
+                    <span>查询:</span>
+                    <input id="slpatient" class='text' type='text' value='请输入查询条件，如患者姓名或手机号' />
+                </p>
+                <p class='btn' onclick="slpatient('select')">
+                    查询
+                </p>
+                <table id="slpata">
+                    <thead>
+                        <tr>
+                            <th>
+                                编号
+                            </th>
+                            <th>
+                                姓名
+                            </th>
+                            <th>
+                                性别
+                            </th>
+                            <th>
+                                年龄
+                            </th>
+                            <th>
+                                联系方式
+                            </th>
+                            <th>
+                                住址
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class='page'>
+                    <span onclick="slpatient('first')">首页</span> <span onclick="slpatient('bf')">上一页</span>
+                    <span onclick="slpatient('af')">下一页</span> <span onclick="slpatient('end')">末页</span>
+                </p>
+            </div>
+            <div class=' task'>
+                <p class='search'>
+                    <span>查询：</span>
+                    <input class='text' id="sltask" type='text' value='请输入查询条件，如患者姓名或手机号' />
+                </p>
+                <p class='btn' onclick="sltask('select')">
+                    查询
+                </p>
+                <p class='waite'>
+                    <span>显示未诊治患者:</span>
+                    <input id="isdiag" type='checkbox' checked='checked' />
+                </p>
+                <table id="sltata">
+                    <thead>
+                        <tr>
+                            <th>
+                                编号
+                            </th>
+                            <th>
+                                姓名
+                            </th>
+                            <th>
+                                性别
+                            </th>
+                            <th>
+                                年龄
+                            </th>
+                            <th>
+                                登记时间
+                            </th>
+                            <th>
+                                住址
+                            </th>
+                            <th>
+                                状态
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class='page'>
+                    <span onclick="sltask('first')">首页</span> <span onclick="sltask('bf')">上一页</span>
+                    <span onclick="sltask('af')">下一页</span> <span onclick="sltask('end')">末页</span>
+                </p>
+                <p class='new' id='addnew' onclick="javascript:window.open('newtask.ashx')">
+                    新增任务</p>
+            </div>
+            <div class='doctor'>
+                <p class='create createdoc'>
+                    添加医师
+                </p>
+                <p class='search'>
+                    <span>查询:</span>
+                    <input class='text' id="doc" type='text' value='请输入查询条件，如医师姓名或手机号' />
+                </p>
+                <p class='btn' onclick="sldoc('select')">
+                    查询
+                </p>
+                <table id="sldocta">
+                    <thead>
+                        <tr>
+                            <th>
+                                编号
+                            </th>
+                            <th>
+                                医师名
+                            </th>
+                            <th>
+                                性别
+                            </th>
+                            <th>
+                                年龄
+                            </th>
+                            <th>
+                                联系方式
+                            </th>
+                            <th>
+                                级别
+                            </th>
+                            <th>
+                                授权
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class='page'>
+                    <span onclick="sldoc('first')">首页</span> <span onclick="sldoc('bf')">上一页</span>
+                    <span onclick="sldoc('af')">下一页</span> <span onclick="sldoc('end')">末页</span>
+                </p>
+            </div>
+            <div class='sql'>
+                数据库管理
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src='../JS/jquery.js'></script>
+
+<script type="text/javascript" src='../JS/adminmain.js'></script>
+
+</html>

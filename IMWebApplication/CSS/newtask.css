@@ -1,0 +1,170 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    width: 1200px;
+    margin: 0 auto;
+    margin-top: 30px;
+    text-align: center;
+    position: relative;
+}
+td .delete{
+	text-decoration:underline;
+	cursor:pointer;
+}
+.checkitem, .patient, .doctor, .addpatient {
+    height: auto;
+    width: 900px;
+    margin: 10px auto;
+    border: 1px #ccc solid;
+    overflow: hidden;
+    padding: 10px 0;
+}
+
+h3 {
+    margin: 20px 0;
+}
+
+.checkitem p, .doctor p {
+    float: left;
+    height: 40px;
+    margin: 0 10px;
+}
+
+.patient .con {
+    height: 300px;
+    overflow: auto;
+    margin: 10px 0;
+}
+
+.patient .showpatientlist {
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    margin: -45px 0px 0px 745px;
+    border: 2px #779FC6 solid;
+    cursor: pointer;
+    cursor: pointer;
+}
+
+table {
+    clear: both;
+    margin: 0 auto;
+    width: 800px;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+td, th {
+    height: 30px;
+    border: 2px #779FC6 solid;
+    border-spacing: 0;
+}
+
+th {
+    background: #cae7fa;
+}
+
+tr:nth-child(even) {
+    background: #ecf5fa;
+}
+
+td span {
+    text-decoration: underline;
+    cursor: pointer;
+    cursor: pointer;
+}
+
+.doctor .search {
+    width: 400px;
+    height: 40px;
+    line-height: 40px;
+    margin: 20px 10px 20px 50px;
+    border: 2px #779FC6 solid;
+    cursor: pointer;
+    cursor: pointer;
+}
+
+.search .text {
+    width: 300px;
+    height: 20px;
+    border: 0;
+    border-bottom: 1px #ccc solid;
+    text-indent: 1em;
+    color: #aaa;
+    outline: 0;
+}
+
+.doctor .btn {
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    margin: 20px 10px;
+    cursor: pointer;
+    cursor: pointer;
+    border: 2px solid #779FC6;
+}
+
+.yes, .cancel {
+    float: left;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    border: 2px solid #779FC6;
+    cursor: pointer;
+    cursor: pointer;
+}
+
+.yes {
+    margin: 0 200px 0 400px;
+}
+/*.addpatientdiv{
+	display: none;
+	width:100%;
+	background:#f1f1f1;
+	border:1px red solid;
+}*/
+.addpatient {
+    display: none;
+    clear: both;
+    position: absolute;
+    top: 110px;
+    left: 250px;
+    background: #fff;
+}
+
+    .addpatient .search, .addpatient .btn, .addpatient .checkall {
+        float: left;
+        border: 2px solid #779FC6;
+        height: 40px;
+        line-height: 40px;
+    }
+
+    .addpatient .search {
+        width: 400px;
+        margin: 20px 10px 20px 50px;
+    }
+
+    .addpatient .btn, .addpatient .checkall {
+        width: 100px;
+        margin: 20px 10px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .addpatient .checkall {
+        margin-left: 155px;
+        text-align: center;
+    }
+
+    .addpatient .yes {
+        margin: 20px 200px 20px 250px;
+        text-align: center;
+    }
+
+    .addpatient .cancel {
+        text-align: center;
+        margin-top: 20px;
+    }

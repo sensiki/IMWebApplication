@@ -1,0 +1,5 @@
+F:\code\MS\CSharp\IMWebApplication\ToolsHelper\bin\Debug\ToolsHelper.dll
+F:\code\MS\CSharp\IMWebApplication\ToolsHelper\bin\Debug\ToolsHelper.pdb
+F:\code\MS\CSharp\IMWebApplication\ToolsHelper\bin\Debug\NVelocity.dll
+F:\code\MS\CSharp\IMWebApplication\ToolsHelper\obj\Debug\ToolsHelper.dll
+F:\code\MS\CSharp\IMWebApplication\ToolsHelper\obj\Debug\ToolsHelper.pdb

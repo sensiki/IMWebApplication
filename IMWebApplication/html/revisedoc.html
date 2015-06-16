@@ -1,0 +1,134 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>修改医师信息</title>
+    <link rel="stylesheet" type="text/css" href="../CSS/newcase.css">
+    <script src="../JS/WdatePicker.js" type="text/javascript"></script>
+    <script src="../JS/ajax.js" type="text/javascript"></script>
+    <script src="../JS/json2.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function GetUrlParms() {
+            var args = new Object();
+            var query = location.search.substring(1); //获取查询串  
+            var pairs = query.split("&"); //在逗号处断开  
+            for (var i = 0; i < pairs.length; i++) {
+                var pos = pairs[i].indexOf('='); //查找name=value  
+                if (pos == -1) continue; //如果没有找到就跳过  
+                var argname = pairs[i].substring(0, pos); //提取name  
+                var value = pairs[i].substring(pos + 1); //提取value  
+                args[argname] = unescape(value); //存为属性  
+            }
+            return args;
+        }
+        var argvalue;
+        window.onload = function () {
+            var args = new Object();
+            args = GetUrlParms();
+            argvalue = args["doc_id"];
+            ajax("revisedoc.ashx", "doc_id=" + argvalue, function (restext) {
+                if (restext == "false")
+                    alert("读取信息失败!(>_<)");
+                else {
+                    var result = JSON.parse(restext);
+                    document.getElementById("name").value = result.name;
+                    document.getElementById("tname").value = result.tname;
+                    document.getElementById("sex").value = result.sex;
+                    document.getElementById("bir").value = result.bir;
+                    document.getElementById("tel").value = result.tel;
+                    document.getElementById("add").value = result.add;
+                    document.getElementById("permisson").checked = result.permisson;
+                }
+            });
+        }
+        function change() {
+            var changecase = {
+                name: document.getElementById("name").value,
+                tname: document.getElementById("tname").value,
+                sex: document.getElementById("sex").value,
+                bir: document.getElementById("bir").value,
+                tel: document.getElementById("tel").value,
+                add: document.getElementById("add").value,
+                permisson: document.getElementById("permisson").checked,
+                oldpasswd: document.getElementById("oldpasswd").value,
+                passwd1: document.getElementById("passwd1").value,
+                passwd2: document.getElementById("passwd2").value
+            };
+            ajax("revisedoc.ashx", "doc_id=" + argvalue + "&changedoc=" + JSON.stringify(changecase), function (restext) {
+                result = JSON.parse(restext);
+                if (result.result == "true") {
+                    alert("修改成功!");
+                    window.location.href = result.data;
+                }
+                else
+                    alert(result.data);
+            });
+
+        }
+    </script>
+</head>
+<body>
+    <div class='wrapper'>
+        <h1>
+            修改医师信息</h1>
+        <div class='content'>
+            <div class='info'>
+                <h3>
+                    基本信息</h3>
+                <p>
+                    <span>用户名:</span>
+                    <input id="name" type='text' />
+                </p>
+                 <p>
+                    <span>真实姓名:</span>
+                    <input id="tname" type='text' />
+                </p>
+                 <p>
+                    <span>出生年月:</span>
+                    <input class="Wdate" id="bir" type="text" onclick="WdatePicker()" />
+                </p>
+                <p>
+                    <span>性别:</span>
+                    <select id="sex">
+                        <option value="男" selected="selected">男</option>
+                        <option value="女">女</option>
+                    </select>
+                </p>
+               
+                <p>
+                    <span>联系方式:</span>
+                    <input id="tel" type='text' />
+                </p>
+                <p>
+                    <span>住址:</span>
+                    <input id="add" type='text' />
+                </p>
+                <img src='../images/pic.jpg' />
+            </div>
+            <div class='check'>
+                <h3>
+                    授权管理</h3>
+                <p>
+                    <span>授权:</span>
+                    <input id="permisson" type='checkbox' />
+                </p>
+                <p style="width: 100%">
+                    <span style="width: 270px">当前密码(修改密码请输入):</span>
+                    <input id="oldpasswd" type="text" />
+                </p>
+                <p>
+                    <span>新密码:</span>
+                    <input id="passwd1" type="text" />
+                </p>
+                <p>
+                    <span>密码确认:</span>
+                    <input id="passwd2" type="text" />
+                </p>
+            </div>
+            <p class='new'>
+                <input type="button" onclick="change()" value="确定" />
+            </p>
+        </div>
+    </div>
+</body>
+</html>

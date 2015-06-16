@@ -1,0 +1,147 @@
+*{
+	margin:0;
+	padding:0;
+}
+.wrapper{
+	width:1200px;
+	height:580px;
+	margin:0 auto;
+	margin-top:30px;
+	text-align:center;
+	position:relative;
+}
+h1{
+	font-size:40px;
+	color:#55a;
+	height:100px;
+	line-height:80px;
+	letter-spacing:10px;
+	text-shadow:-2px 2px 2px #aaa;
+}
+ul,.content div{
+	float:left;
+}
+.task .waite{
+	width:200px;
+	margin-left:80px;
+	cursor:pointer;
+}
+.task .new{
+	width:100px;
+	height:30px;
+	font-weight:bold;
+	margin:-50px 0 0 420px;
+	cursor:pointer;
+}
+.content li{
+	list-style:none;
+	height:40px;
+	line-height:40px;
+	margin-bottom:10px;
+	margin-left:10px;
+	width:150px;
+	border:1px #ccc solid;
+	border-radius:10px 0 0 10px;
+	cursor:pointer;
+	cursor:pointer;
+	letter-spacing:5px;
+	font-size:20px;
+	border-right:0;
+}
+.content li:hover,.content .selected{
+	background:#ccc;
+	box-shadow:-2px 2px 2px 0 #aaa;
+	color:#fff;
+	text-shadow:1px 1px 1px #000;
+}
+.content div{
+	border:1px #ccc solid;
+	box-shadow:-2px 0 2px 1px #ccc;
+	width:960px;
+	height:520px;
+	display:none;
+}
+.content .show{
+	display:block;
+}
+.show p{
+	float:left;
+	height:30px;
+	line-height:30px;
+	border:2px #779FC6 solid;
+	margin:20px 5px;
+	letter-spacing:3px;
+}
+.show .create{
+	width:120px;
+}
+.show .create{
+	margin:20px 80px;
+	cursor:pointer;
+	cursor:pointer;
+}
+.show .search{
+	width:400px;
+	margin:20px 5px 20px 80px;
+}
+.search .text{
+	width:300px;
+	height:20px;
+	border:0;
+	border-bottom:1px #ccc solid;
+	text-indent:1em;
+	color:#aaa;
+	outline:0;
+}
+.show .btn{
+	width:100px;
+	cursor:pointer;
+	cursor:pointer;
+	text-align:center;
+}
+table{
+	clear:both;
+	margin:0 auto;
+	width:800px;
+	/*border:2px #779FC6 solid;*/
+	border-collapse:collapse;
+}
+td,th{
+	height:30px;
+	border:2px #779FC6 solid;
+	border-spacing:0;
+}
+th{
+	background:#cae7fa;
+}
+tr:nth-child(even){
+	background:#ecf5fa;
+}
+td span{
+	text-decoration:underline;
+	cursor:pointer;
+}
+.show .page{
+	margin-left:620px;
+	border:0;
+	width:300px;
+}
+.page span{
+	text-decoration:underline;
+	cursor:pointer;
+	cursor:pointer;
+}
+.task .checkall,.doctor .checkall{
+	width:100px;
+	margin-left:170px;
+	cursor:pointer;
+	cursor:pointer;
+}
+.task .record{
+	width:100px;
+	height:30px;
+	font-weight:bold;
+	margin:-50px 0 0 420px;
+	cursor:pointer;
+	cursor:pointer;
+}

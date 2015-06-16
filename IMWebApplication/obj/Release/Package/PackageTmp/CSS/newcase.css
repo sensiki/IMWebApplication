@@ -1,0 +1,120 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    width: 1200px;
+    height: 580px;
+    margin: 0 auto;
+    margin-top: 30px;
+    text-align: center;
+    position: relative;
+}
+
+h1 {
+    font-size: 40px;
+    color: #55a;
+    height: 100px;
+    line-height: 80px;
+    letter-spacing: 10px;
+    text-shadow: -2px 2px 2px #aaa;
+}
+
+.content {
+    border: 1px #ccc solid;
+    box-shadow: -2px 0 2px 1px #ccc;
+    width: 960px;
+    height: 480px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.info {
+    height: 180px;
+    margin: 20px 0;
+}
+
+    .info select {
+        width: 80px;
+    }
+
+.check {
+    height: 200px;
+}
+
+.info p {
+    float: left;
+    margin: 20px 10px 0px 20px;
+}
+
+.info span, .info input {
+    height: 30px;
+    line-height: 30px;
+}
+
+.info span, .check span {
+    float: left;
+    width: 100px;
+    height: 20px;
+    line-height: 20px;
+    text-align: left;
+    letter-spacing: 3px;
+}
+
+.info input, .check input {
+    border: 0;
+    float: left;
+    height: 20px;
+    line-height: 20px;
+    border-bottom: 1px #ccc solid;
+    outline: 0;
+    overflow: hidden;
+}
+
+.info img {
+    width: 90px;
+    height: 120px;
+    border: 1px #ccc solid;
+    padding: 5px 10px;
+}
+
+.check p {
+    float: left;
+    margin: 30px 0px 0 20px;
+}
+
+.check .btn {
+    margin-left: 10px;
+}
+
+.btn input {
+    width: 80px;
+    height: 40px;
+    line-height: 40px;
+    margin-left: 30px;
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.wrapper .new {
+    width: 100%;
+    height: 40px;
+    font-weight: bold;
+    padding-top: 10px;
+    cursor: pointer;
+    cursor: pointer;
+}
+
+.new input {
+    width: 80px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 15px;
+    border: 0;
+    border-bottom: 1px #ccc solid;
+    outline: 0;
+    overflow: hidden;
+}

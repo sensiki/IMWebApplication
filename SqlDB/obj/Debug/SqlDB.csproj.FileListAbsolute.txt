@@ -1,0 +1,9 @@
+F:\code\MS\CSharp\IMWebApplication\SqlDB\bin\Debug\DBConfig.ini
+F:\code\MS\CSharp\IMWebApplication\SqlDB\bin\Debug\SqlDB.dll
+F:\code\MS\CSharp\IMWebApplication\SqlDB\bin\Debug\SqlDB.pdb
+F:\code\MS\CSharp\IMWebApplication\SqlDB\bin\Debug\ToolsHelper.dll
+F:\code\MS\CSharp\IMWebApplication\SqlDB\bin\Debug\NVelocity.dll
+F:\code\MS\CSharp\IMWebApplication\SqlDB\bin\Debug\ToolsHelper.pdb
+F:\code\MS\CSharp\IMWebApplication\SqlDB\obj\Debug\SqlDB.csprojResolveAssemblyReference.cache
+F:\code\MS\CSharp\IMWebApplication\SqlDB\obj\Debug\SqlDB.dll
+F:\code\MS\CSharp\IMWebApplication\SqlDB\obj\Debug\SqlDB.pdb

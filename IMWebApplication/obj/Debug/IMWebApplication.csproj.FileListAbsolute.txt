@@ -1,0 +1,16 @@
+F:\code\MS\CSharp\IMWebApplication\IMWebApplication\bin\IMWebApplication.dll
+F:\code\MS\CSharp\IMWebApplication\IMWebApplication\bin\IMWebApplication.pdb
+F:\code\MS\CSharp\IMWebApplication\IMWebApplication\bin\IMDbVisit.dll
+F:\code\MS\CSharp\IMWebApplication\IMWebApplication\bin\IMModel.dll
+F:\code\MS\CSharp\IMWebApplication\IMWebApplication\bin\Newtonsoft.Json.dll
+F:\code\MS\CSharp\IMWebApplication\IMWebApplication\bin\ToolsHelper.dll
+F:\code\MS\CSharp\IMWebApplication\IMWebApplication\bin\SqlDB.dll
+F:\code\MS\CSharp\IMWebApplication\IMWebApplication\bin\NVelocity.dll
+F:\code\MS\CSharp\IMWebApplication\IMWebApplication\bin\IMDbVisit.pdb
+F:\code\MS\CSharp\IMWebApplication\IMWebApplication\bin\IMModel.pdb
+F:\code\MS\CSharp\IMWebApplication\IMWebApplication\bin\ToolsHelper.pdb
+F:\code\MS\CSharp\IMWebApplication\IMWebApplication\bin\SqlDB.pdb
+F:\code\MS\CSharp\IMWebApplication\IMWebApplication\obj\Debug\IMWebApplication.csprojResolveAssemblyReference.cache
+F:\code\MS\CSharp\IMWebApplication\IMWebApplication\obj\Debug\IMWebApplication.dll
+F:\code\MS\CSharp\IMWebApplication\IMWebApplication\obj\Debug\IMWebApplication.pdb
+F:\code\MS\CSharp\IMWebApplication\IMWebApplication\bin\DBConfig.ini

@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+您 Web 项目的发布/打包进程将使用此文件。您可以通过编辑此 MSBuild 文件
+来自定义该进程的行为。若要了解与此相关的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=208121。
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile>2014-07-08T17:16:08.0000000+08:00</TimeStampOfAssociatedLegacyPublishXmlFile>
+    <_PublishTargetUrl>C:\Users\siki\Desktop\SmartCare\WebSite</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="Admin/admin.ashx">
+      <publishTime>06/05/2014 19:44:00</publishTime>
+    </File>
+    <File Include="Admin/cureinfo.ashx">
+      <publishTime>06/05/2014 19:56:14</publishTime>
+    </File>
+    <File Include="Admin/ecg_history.ashx">
+      <publishTime>06/08/2014 12:02:32</publishTime>
+    </File>
+    <File Include="Admin/login.ashx">
+      <publishTime>06/05/2014 20:01:06</publishTime>
+    </File>
+    <File Include="Admin/main.ashx">
+      <publishTime>06/05/2014 20:02:48</publishTime>
+    </File>
+    <File Include="Admin/newcase.ashx">
+      <publishTime>06/05/2014 20:05:46</publishTime>
+    </File>
+    <File Include="Admin/newdoc.ashx">
+      <publishTime>06/05/2014 20:07:06</publishTime>
+    </File>
+    <File Include="Admin/newtask.ashx">
+      <publishTime>06/05/2014 20:08:14</publishTime>
+    </File>
+    <File Include="Admin/revisecase.ashx">
+      <publishTime>06/05/2014 20:10:00</publishTime>
+    </File>
+    <File Include="Admin/revisedoc.ashx">
+      <publishTime>06/05/2014 20:18:54</publishTime>
+    </File>
+    <File Include="bin/DBConfig.ini">
+      <publishTime>07/08/2014 16:52:10</publishTime>
+    </File>
+    <File Include="bin/IMDbVisit.dll">
+      <publishTime>05/07/2015 17:14:29</publishTime>
+    </File>
+    <File Include="bin/IMModel.dll">
+      <publishTime>03/05/2015 15:30:03</publishTime>
+    </File>
+    <File Include="bin/IMWebApplication.dll">
+      <publishTime>05/07/2015 17:14:29</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>06/05/2014 19:37:38</publishTime>
+    </File>
+    <File Include="bin/NVelocity.dll">
+      <publishTime>06/05/2014 19:31:42</publishTime>
+    </File>
+    <File Include="bin/SqlDB.dll">
+      <publishTime>05/07/2015 17:14:28</publishTime>
+    </File>
+    <File Include="bin/ToolsHelper.dll">
+      <publishTime>03/05/2015 15:30:03</publishTime>
+    </File>
+    <File Include="CSS/adminmain.css">
+      <publishTime>06/05/2014 19:33:54</publishTime>
+    </File>
+    <File Include="CSS/ckdoc.css">
+      <publishTime>06/05/2014 19:33:54</publishTime>
+    </File>
+    <File Include="CSS/docmain.css">
+      <publishTime>06/05/2014 19:33:54</publishTime>
+    </File>
+    <File Include="CSS/index.css">
+      <publishTime>06/05/2014 19:33:54</publishTime>
+    </File>
+    <File Include="CSS/newcase.css">
+      <publishTime>06/05/2014 19:33:54</publishTime>
+    </File>
+    <File Include="CSS/newtask.css">
+      <publishTime>06/05/2014 19:33:54</publishTime>
+    </File>
+    <File Include="CSS/result.css">
+      <publishTime>06/05/2014 19:33:54</publishTime>
+    </File>
+    <File Include="DBConfig.ini">
+      <publishTime>07/08/2014 16:52:10</publishTime>
+    </File>
+    <File Include="html/admin.html">
+      <publishTime>06/05/2014 19:34:06</publishTime>
+    </File>
+    <File Include="html/cureinfo.html">
+      <publishTime>06/06/2014 13:22:24</publishTime>
+    </File>
+    <File Include="html/ecg_history.html">
+      <publishTime>06/05/2014 19:34:06</publishTime>
+    </File>
+    <File Include="html/login.html">
+      <publishTime>06/05/2014 19:34:06</publishTime>
+    </File>
+    <File Include="html/main.html">
+      <publishTime>06/05/2014 19:34:06</publishTime>
+    </File>
+    <File Include="html/newcase.html">
+      <publishTime>06/05/2014 20:26:20</publishTime>
+    </File>
+    <File Include="html/newdoc.html">
+      <publishTime>06/05/2014 19:34:06</publishTime>
+    </File>
+    <File Include="html/newtask.html">
+      <publishTime>03/19/2015 11:10:42</publishTime>
+    </File>
+    <File Include="html/revisecase.html">
+      <publishTime>06/05/2014 20:26:34</publishTime>
+    </File>
+    <File Include="html/revisedoc.html">
+      <publishTime>06/05/2014 19:34:06</publishTime>
+    </File>
+    <File Include="HttpErrors/404.htm">
+      <publishTime>06/05/2014 19:34:12</publishTime>
+    </File>
+    <File Include="images/404.jpg">
+      <publishTime>06/05/2014 19:34:16</publishTime>
+    </File>
+    <File Include="images/bac.png">
+      <publishTime>06/05/2014 19:34:16</publishTime>
+    </File>
+    <File Include="images/back.jpg">
+      <publishTime>06/05/2014 19:34:16</publishTime>
+    </File>
+    <File Include="images/default_head.jpg">
+      <publishTime>06/05/2014 19:34:16</publishTime>
+    </File>
+    <File Include="images/ecg_back.png">
+      <publishTime>06/05/2014 19:34:16</publishTime>
+    </File>
+    <File Include="images/index_bak.jpg">
+      <publishTime>06/05/2014 19:34:16</publishTime>
+    </File>
+    <File Include="images/lc_bp.jpg">
+      <publishTime>06/05/2014 19:34:16</publishTime>
+    </File>
+    <File Include="images/lc_tem.jpg">
+      <publishTime>06/05/2014 19:34:16</publishTime>
+    </File>
+    <File Include="images/new.jpg">
+      <publishTime>06/05/2014 19:34:16</publishTime>
+    </File>
+    <File Include="images/pic.jpg">
+      <publishTime>06/05/2014 19:34:16</publishTime>
+    </File>
+    <File Include="images/user_all_bg.gif">
+      <publishTime>06/05/2014 19:34:16</publishTime>
+    </File>
+    <File Include="IMServices.asmx">
+      <publishTime>06/06/2014 12:25:40</publishTime>
+    </File>
+    <File Include="index.html">
+      <publishTime>06/05/2014 19:33:48</publishTime>
+    </File>
+    <File Include="JS/adminmain.js">
+      <publishTime>06/05/2014 19:34:22</publishTime>
+    </File>
+    <File Include="JS/ajax.js">
+      <publishTime>06/05/2014 19:34:22</publishTime>
+    </File>
+    <File Include="JS/calendar.js">
+      <publishTime>06/05/2014 19:34:22</publishTime>
+    </File>
+    <File Include="JS/ckdoc.js">
+      <publishTime>06/05/2014 19:34:22</publishTime>
+    </File>
+    <File Include="JS/docmain.js">
+      <publishTime>06/05/2014 19:34:22</publishTime>
+    </File>
+    <File Include="JS/jquery.js">
+      <publishTime>06/05/2014 19:34:22</publishTime>
+    </File>
+    <File Include="JS/json2.js">
+      <publishTime>06/05/2014 19:34:22</publishTime>
+    </File>
+    <File Include="JS/lang/en.js">
+      <publishTime>06/05/2014 19:34:22</publishTime>
+    </File>
+    <File Include="JS/lang/zh-cn.js">
+      <publishTime>06/05/2014 19:34:22</publishTime>
+    </File>
+    <File Include="JS/lang/zh-tw.js">
+      <publishTime>06/05/2014 19:34:22</publishTime>
+    </File>
+    <File Include="JS/skin/datePicker.gif">
+      <publishTime>06/05/2014 19:34:22</publishTime>
+    </File>
+    <File Include="JS/skin/default/datepicker.css">
+      <publishTime>06/05/2014 19:34:22</publishTime>
+    </File>
+    <File Include="JS/skin/default/img.gif">
+      <publishTime>06/05/2014 19:34:22</publishTime>
+    </File>
+    <File Include="JS/skin/WdatePicker.css">
+      <publishTime>06/05/2014 19:34:22</publishTime>
+    </File>
+    <File Include="JS/skin/whyGreen/bg.jpg">
+      <publishTime>06/05/2014 19:34:22</publishTime>
+    </File>
+    <File Include="JS/skin/whyGreen/datepicker.css">
+      <publishTime>06/05/2014 19:34:22</publishTime>
+    </File>
+    <File Include="JS/skin/whyGreen/img.gif">
+      <publishTime>06/05/2014 19:34:22</publishTime>
+    </File>
+    <File Include="JS/WdatePicker.js">
+      <publishTime>06/05/2014 19:34:22</publishTime>
+    </File>
+    <File Include="Newtonsoft.Json.dll">
+      <publishTime>06/05/2014 19:37:38</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>05/07/2015 17:14:42</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

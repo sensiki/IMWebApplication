@@ -1,0 +1,762 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>新建任务</title>
+    <script src="../JS/jquery.js"></script>
+    <script src="../JS/ajax.js"></script>
+    <link rel="stylesheet" type="text/css" href="../CSS/newtask.css">
+    <script type="text/javascript">
+        var nonelength = 8;
+        function GetUrlParms() {
+            var args = new Object();
+            var query = location.search.substring(1); //获取查询串
+            var pairs = query.split("&"); //在逗号处断开
+            for (var i = 0; i < pairs.length; i++) {
+                var pos = pairs[i].indexOf('='); //查找name=value
+                if (pos == -1) continue; //如果没有找到就跳过
+                var argname = pairs[i].substring(0, pos); //提取name
+                var value = pairs[i].substring(pos + 1); //提取value
+                args[argname] = unescape(value); //存为属性
+            }
+            return args;
+        }
+        var argvalue;
+        var flag = 0;
+        window.onload = function () {
+            flag = 0;
+            /*全选*/
+            $(".checkall").click(function () {
+                if (flag == 1) {
+                    $("#slpata :checkbox").attr("checked", "false");
+                    flag = 0;
+                } else {
+                    $("#slpata :checkbox").attr("checked", "true");
+                    flag = 1;
+                }
+            });
+
+            //确定键 隐藏弹出层
+            $('.addpatient .yes').click(function () {
+                $('.addpatient').css({ "display": "none" });
+                $('.wrapper>div,.wrapper>p').css({ "display": "block" });
+                $('body').css({ "background": "#fff" });
+
+                var plist = document.getElementById("patientlist");
+                var splist = document.getElementById("slpata");
+                for (var i = 1; i < splist.rows.length && splist.rows[i].cells[0].innerHTML != ""; i++) {
+                    if (!splist.rows[i].cells[6].childNodes[0].checked)
+                        continue;
+                    for (var j = 1; j < plist.rows.length && plist.rows[j].cells[0].innerHTML != ""; j++) {
+                        if (parseInt(splist.rows[i].cells[0].innerHTML) > parseInt(plist.rows[j].cells[0].innerHTML))
+                            continue;
+                        break;
+                    }
+                    if (j < plist.rows.length && plist.rows[j].cells[0].innerHTML != "" && (parseInt(splist.rows[i].cells[0].innerHTML) == parseInt(plist.rows[j].cells[0].innerHTML)))
+                        continue;
+                    var tr = plist.insertRow(j);
+                    
+                    tr.insertCell(-1).innerHTML = splist.rows[i].cells[0].innerHTML;
+                    tr.insertCell(-1).innerHTML = splist.rows[i].cells[1].innerHTML;
+                    tr.insertCell(-1).innerHTML = splist.rows[i].cells[2].innerHTML;
+                    tr.insertCell(-1).innerHTML = splist.rows[i].cells[3].innerHTML;
+                    tr.insertCell(-1).innerHTML = splist.rows[i].cells[4].innerHTML;
+                    tr.insertCell(-1).innerHTML = splist.rows[i].cells[5].innerHTML;
+                    tr.insertCell(-1).innerHTML = "<p class='delete' onclick = 'delrows(this)'>删除</p>";
+                    if (nonelength > 0) {
+                        plist.deleteRow(9 - (--nonelength));
+                    }
+                }
+            });
+            //取消键 隐藏弹出层
+            $('.addpatient .cancel').click(function () {
+                $('.addpatient').css({ "display": "none" });
+                $('.wrapper>div,.wrapper>p').css({ "display": "block" });
+                $('body').css({ "background": "#fff" });
+            });
+            //新增键 显示弹出层
+            $('.showpatientlist').click(function () {
+                $('.addpatient').css({ "display": "block" });
+                $('.wrapper>div,.wrapper>p').css({ "display": "none" });
+                $('body').css({ "background": "#ccc" });
+            });
+            /*文本框获取焦点时清空内容*/
+            $('.text').focus(function () {
+                if ($(this).context.value == "请输入查询条件，如患者姓名或手机号" || $(this).context.value == "请输入查询条件，如医师姓名或手机号")
+                    $(this).val('');
+            });
+
+
+            var args = new Object();
+            args = GetUrlParms();
+            argvalue = args["patient_id"];
+            if (argvalue != null) {
+                ajax("newtask.ashx", "type=newtask&patient_id=" + argvalue, function (restext) {
+                    if (restext == "false")
+                        alert("读取信息失败!(>_<)");
+                    else {
+                        var result = JSON.parse(restext);
+                        document.getElementById("name").value = result.name;
+                        document.getElementById("sex").value = result.sex;
+                        document.getElementById("bir").value = result.bir;
+                        document.getElementById("tel").value = result.tel;
+                        if (result.marriage != null && result.marriage != "")
+                            document.getElementById("marriage").value = result.marriage;
+                        document.getElementById("address").value = result.address;
+                        document.getElementById("mail").value = result.mail;
+                        if (result.marriage != null && result.credentialstype != "")
+                            document.getElementById("credentialstype").value = result.credentialstype;
+                        document.getElementById("credentials").value = result.credentials;
+                        document.getElementById("height").value = result.height;
+                        document.getElementById("weight").value = result.weight;
+                        document.getElementById("disease").value = result.disease;
+                        document.getElementById("remask").value = result.remask;
+                    }
+                });
+            }
+        }
+        function delrows(obj) {
+            var tr = obj.parentNode.parentNode;
+            if (nonelength != 8) {
+                var row = tr.parentNode.parentNode.insertRow(tr.parentNode.parentNode.rows.length);
+                row.insertCell().innerHTML = "";
+                row.insertCell().innerHTML = "";
+                row.insertCell().innerHTML = "";
+                row.insertCell().innerHTML = "";
+                row.insertCell().innerHTML = "";
+                row.insertCell().innerHTML = "";
+                row.insertCell().innerHTML = "";
+                nonelength++;
+            }
+            tr.parentNode.removeChild(tr);
+
+
+        }
+
+        function slpatient() {
+            var slpatient = document.getElementById("slpatient").value;
+            var slpata = document.getElementById("slpata");
+            if (slpatient == "请输入查询条件，如患者姓名或手机号")
+                slpatient = "";
+            ajax("newtask.ashx", "type=slpatient&slpatient=" + slpatient, function (restext) {
+                var result = JSON.parse(restext);
+                if (result.result == "true") {
+                    slpata.innerHTML = result.data;
+                }
+            });
+            flag = 0;
+        }
+        function addpatientlist() {
+            var slpata = document.getElementById("slpata");
+
+            var checks = document.getElementsByName("tasklist");
+            var list = new Object();
+            var chtask = "{\"tasklist\":[";
+            var flag = 0;
+            for (var i = 0, j = 0; i < checks.length; i++) {
+                if (checks[i].checked) {
+                    if (flag == 1)
+                        chtask += ",";
+                    list[j] = checks[i].value;
+                    chtask += list[j].toString();
+                    flag = 1;
+                    j++;
+                }
+            }
+            chtask += "]}";
+
+            window.location.href = "ckdoc.ashx?type=ckdoc&tasklist=" + chtask;
+            /*
+            ajax("admin.ashx?type=ckdoc&tasklist=" + JSON.stringify(chtask), function(restext) {
+            var result = JSON.parse(restext);
+            if (result.result == "true") {
+            sltata.innerHTML = result.data;
+            }
+            });
+            */
+        }
+        function sldoc() {
+            var doc = document.getElementById("sldoc").value;
+            var sldocta = document.getElementById("sldocta");
+            ajax("newtask.ashx", "type=sldocta&sldoc=" + doc, function (restext) {
+                var result = JSON.parse(restext);
+                if (result.result == "true") {
+                    sldocta.innerHTML = result.data;
+                }
+            });
+        }
+        function createtask() {
+            var sldocta = document.getElementById("sldocta");
+            var patientlist = document.getElementById("patientlist");
+            var ecg = document.getElementById("ecg").checked;
+            var bloodpress = document.getElementById("bloodpress").checked;
+            var temperature = document.getElementById("temperature").checked;
+            var glucose = document.getElementById("glucose").checked;
+            var docid;
+            //{task:123, patient:[1,2,3,4], doctor:12}
+            var task = "{task:";
+            var temp = 0;
+            if (ecg)
+                temp |= 1 << 0;
+            if (bloodpress)
+                temp |= 1 << 1;
+            if (glucose)
+                temp |= 1 << 2;
+            if (temperature)
+                temp |= 1 << 3;
+            if (!temp) {
+                alert("请选择体检项目！");
+                return;
+            }
+            task += temp.toString() + ",patient:[";
+            var flag = 0;
+            for (var i = 1; i < patientlist.rows.length && patientlist.rows[i].cells[0].innerText != ""; i++) {
+                if (flag == 1)
+                    task += ",";
+                task += patientlist.rows[i].cells[0].innerText;
+                flag = 1;
+            }
+            if (!flag) {
+                alert("请选择患者!");
+                return;
+            }
+            task += "],doctor:";
+            for (i = 1; i < sldocta.rows.length && sldocta.rows[i].cells[0].innerHTML != ""; i++) {
+                if (sldocta.rows[i].cells[5].childNodes[0].checked) {
+                    task += sldocta.rows[i].cells[0].innerHTML + "}";
+                    flag = 0;
+                    break;
+                }
+            }
+            if (flag) {
+                alert("请选择医师！");
+                return;
+            }
+            ajax("newtask.ashx", "type=settask&list=" + task, function (restext) {
+                if (restext == "true") {
+                    alert("新增成功!");
+                    window.location.href = "newtask.ashx";
+                }
+            });
+
+        }
+    </script>
+</head>
+<body>
+    <div class='wrapper'>
+        <div class='checkitem'>
+            <h3>
+                诊治项目选择</h3>
+            <p>
+                <span>心电图:</span>
+                <input id="ecg" type='checkbox' />
+            </p>
+            <p>
+                <span>血压:</span>
+                <input id="bloodpress" type='checkbox' />
+            </p>
+            <p>
+                <span>体温:</span>
+                <input id="temperature" type='checkbox' />
+            </p>
+            <p>
+                <span>血糖:</span>
+                <input id="glucose" type='checkbox' />
+            </p>
+        </div>
+        <div class='patient'>
+            <h3>
+                患者选择列表</h3>
+            <p class='showpatientlist'>
+                新增</p>
+            <div class='con'>
+                <table id="patientlist">
+                    <thead>
+                        <tr>
+                            <th>
+                                编号
+                            </th>
+                            <th>
+                                姓名
+                            </th>
+                            <th>
+                                性别
+                            </th>
+                            <th>
+                                年龄
+                            </th>
+                            <th>
+                                联系方式
+                            </th>
+                            <th>
+                                住址
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class='doctor'>
+            <h3>
+                医师选择列表</h3>
+            <p class='search'>
+                <span>查询：</span>
+                <input id="sldoc" class='text' type='text' />
+            </p>
+            <p class='btn' onclick="sldoc()">
+                查询
+            </p>
+            <table id="sldocta">
+                <thead>
+                    <tr>
+                        <th>
+                            医师编号
+                        </th>
+                        <th>
+                            医师名
+                        </th>
+                        <th>
+                            性别
+                        </th>
+                        <th>
+                            年龄
+                        </th>
+                        <th>
+                            级别
+                        </th>
+                        <th>
+                            选择
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class='yes' onclick="createtask()">
+            确定</p>
+        <p class='cancel' onclick="javascript:window.close()">
+            取消</p>
+    </div>
+    <div class='addpatient'>
+        <p class='search'>
+            <span>查询：</span>
+            <input class='text' id="slpatient" type='text' value='请输入查询条件，如患者姓名或手机号' />
+        </p>
+        <p class='btn' onclick="slpatient()">
+            查询</p>
+        <p class='checkall'>
+            全选</p>
+        <table id="slpata">
+            <thead>
+                <tr>
+                    <th>
+                        编号
+                    </th>
+                    <th>
+                        姓名
+                    </th>
+                    <th>
+                        性别
+                    </th>
+                    <th>
+                        年龄
+                    </th>
+                    <th>
+                        联系方式
+                    </th>
+                    <th>
+                        住址
+                    </th>
+                    <th>
+                        操作
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class='yes'>
+            确定</p>
+        <p class='cancel'>
+            取消</p>
+    </div>
+</body>
+</html>

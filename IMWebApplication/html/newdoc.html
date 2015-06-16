@@ -1,0 +1,100 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>创建医师</title>
+    <link rel="stylesheet" type="text/css" href="../CSS/newcase.css">
+    <script src="../JS/WdatePicker.js" type="text/javascript"></script>
+    <script src="../JS/ajax.js" type="text/javascript"></script>
+    <script src="../JS/json2.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function create() {
+            var newdoc = {
+                name: document.getElementById("name").value,
+                tname: document.getElementById("tname").value,
+                sex: document.getElementById("sex").value,
+                bir: document.getElementById("bir").value,
+                tel: document.getElementById("tel").value,
+                add: document.getElementById("add").value,
+                permisson: document.getElementById("permisson").checked,
+                passwd1: document.getElementById("passwd1").value,
+                passwd2: document.getElementById("passwd2").value
+            };
+            if (newdoc.passwd1 != newdoc.passwd2) {
+                alert("两次密码输入有误!");
+                return;
+            }
+            ajax("newdoc.ashx", "newdoc=" + JSON.stringify(newdoc), function (restext) {
+                var result = JSON.parse(restext);
+                if (result.result == 0) {
+                    alert("创建成功!");
+                    window.close();
+                }
+                else
+                    alert(result.data);
+            });
+
+        }
+    </script>
+</head>
+<body>
+    <div class='wrapper'>
+        <h1>
+            添加医师</h1>
+        <div class='content'>
+            <div class='info'>
+                <h3>
+                    基本信息</h3>
+                <p>
+                    <span>用户名:</span>
+                    <input id="name" type="text" />
+                </p>
+                <p>
+                    <span>真实姓名:</span>
+                    <input id="tname" type='text' />
+                </p>
+                <p>
+                    <span>出生年月:</span>
+                    <input class="Wdate" id="bir" type="text" onclick="WdatePicker()" />
+                </p>
+                <p>
+                    <span>性别:</span>
+                    <select id="sex">
+                        <option value="男" selected="selected">男</option>
+                        <option value="女">女</option>
+                    </select>
+                </p>
+                
+                <p>
+                    <span>联系方式:</span>
+                    <input id="tel" type='text' />
+                </p>
+                <p>
+                    <span>住址:</span>
+                    <input id="add" type='text' />
+                </p>
+                <img src='../images/pic.jpg' />
+            </div>
+            <div class='check'>
+                <h3>
+                    授权管理</h3>
+                <p>
+                    <span>授权:</span>
+                    <input id="permisson" type='checkbox' />
+                </p>
+                <p>
+                    <span>初始密码:</span>
+                    <input id="passwd1" type="text" value="88888888" />
+                </p>
+                <p>
+                    <span>密码确认:</span>
+                    <input id="passwd2" type="text" />
+                </p>
+            </div>
+            <p class='new'>
+                <input type="button" onclick="create()" value="确定" />
+            </p>
+        </div>
+    </div>
+</body>
+</html>

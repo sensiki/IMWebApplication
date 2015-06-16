@@ -1,0 +1,82 @@
+*{
+	margin:0;
+	padding:0;
+}
+.wrapper{
+	width:940px;
+	height:530px;
+	margin:0 auto;
+	margin-top:56px;
+	background:url('../images/bac.png') no-repeat;
+	border:1px #ccc solid;
+	border-radius:10px;
+	box-shadow:-3px 3px 3px #ddd;
+	position:relative;
+}
+b{
+	font-size:50px;
+	margin:10% 0 0 58%;
+	display:block;
+	color:#55a;
+	letter-spacing:20px;
+	text-shadow:-3px 3px 3px #aaa;
+}
+.main{
+	width:400px;
+	height:200px;
+	position:absolute;
+	border:1px #ccc solid;
+	border-radius:10px;
+	left:50%;
+	top:40%;
+	padding-top:20px;
+}
+.username,.password{
+	width:300px;
+	height:46px;
+	line-height:46px;
+	margin:5px auto;
+}
+p,input{
+	float:left;
+}
+p{
+	width:70px;
+	text-align:center;
+}
+.password p{
+	letter-spacing:12px;
+	margin-left:6px;
+	width:65px;
+}
+input{
+	height:25px;
+	width:200px;
+	margin-top:10px;
+	border-style:inset;
+}
+span{
+	text-align:center;
+	display:block;
+	color:red;
+	padding:4px 0;
+}
+.btn{
+	width:100px;
+	height:30px;
+	border:0;
+	margin-left:36%;
+	cursor:pointer;
+	cursor:hand;
+	border-radius:10px;
+	border:1px #ccc solid;
+}
+.btn:hover{
+	border:1px #aaa solid;
+}
+@media screen and (max-width:320px){
+	
+}
+@media screen and (min-width:600px) and (max-width:960px){
+
+}
